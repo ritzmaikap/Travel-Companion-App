@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        android:background="#D3D0E6"
+        >
+
+        <TextView
+            android:id="@+id/appHeading"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:text="Travel Companion App"
+            android:textAlignment="center"
+            android:textColor="#504889"
+            android:textSize="12pt"
+            android:textStyle="bold"
+            android:padding="20px"
+            />
+
+
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="682dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20px">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="20px">
+
+                    <TextView
+                        android:id="@+id/categoryHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="43dp"
+                        android:paddingLeft="20px"
+                        android:paddingTop="18px"
+                        android:text="Select Conversion Category"
+                        android:textAlignment="textStart"
+                        android:textColor="#3B3B3B"
+                        android:textSize="50px"
+                        android:background="#F1F0F4"/>
+
+                    <Spinner
+                        android:id="@+id/categoryOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:spinnerMode="dialog"
+                        android:entries="@array/conversion_categories"
+                        android:background="#F1F0F4"
+                        >
+
+
+                    </Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="20px">
+                    <TextView
+                        android:id="@+id/sourceHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="43dp"
+                        android:paddingLeft="20px"
+                        android:paddingTop="18px"
+                        android:text="From"
+                        android:textAlignment="textStart"
+                        android:textColor="#3B3B3B"
+                        android:textSize="50px"
+                        android:background="#F1F0F4"/>
+
+                    <Spinner
+                        android:id="@+id/sourceOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:spinnerMode="dialog"
+                        android:entries="@array/currency_units"
+                        android:background="#F1F0F4"
+                        >
+                    </Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="20px"
+                    >
+                    <TextView
+                        android:id="@+id/destHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="43dp"
+                        android:paddingLeft="20px"
+                        android:paddingTop="18px"
+                        android:text="To"
+                        android:textAlignment="textStart"
+                        android:textColor="#3B3B3B"
+                        android:textSize="50px"
+                        android:background="#F1F0F4"/>
+
+                    <Spinner
+                        android:id="@+id/destOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:spinnerMode="dialog"
+                        android:entries="@array/currency_units"
+                        android:background="#F1F0F4"
+                        >
+                    </Spinner>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/enterValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_margin="20px"
+                    android:background="#F1F0F4"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:padding="18px"
+                    android:hint="Enter Value"
+                    />
+
+                <Button
+                    android:id="@+id/convertButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Convert"
+                    android:layout_margin="20px"/>
+
+                <TextView
+                    android:id="@+id/resultDisplay"
+                    android:layout_width="match_parent"
+                    android:layout_height="73dp"
+                    android:text="Converted value will appear here"
+                    android:background="#ADA8E1"
+                    android:layout_margin="20px"
+                    android:textColor="#4E41BE"
+                    android:textStyle="bold"
+                    android:textSize="40px"
+                    android:textAlignment="center"
+                    android:padding="24dp"/>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
