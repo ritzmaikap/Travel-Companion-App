@@ -2,7 +2,6 @@ package com.example.travel_companion;
 
 import android.os.Bundle;
 
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -17,10 +16,11 @@ import android.widget.EditText; // to import editText(user input) properties
 import android.widget.Spinner; // to import dropdown properties
 import android.widget.TextView; // to import display text properties
 import android.widget.AdapterView; // imported to handle spinner options selection
+import android.widget.Toast; // imported for raising toasts displaying error messages
 
 
 public class MainActivity extends AppCompatActivity {
-    // Declaring all UI component IDs as I will be using these IDs to capture the values
+    // declaring all UI component IDs as I will be using these IDs to capture the values
     Spinner categoryOption, sourceOption, destOption;
     EditText enterValue;
     Button convertButton;
@@ -81,16 +81,62 @@ public class MainActivity extends AppCompatActivity {
             String destUnit = destOption.getSelectedItem().toString();
 
             // get input value as string
-            String inputText = enterValue.getText().toString();
+            String inputText = enterValue.getText().toString().trim();
 
-            // convert string input to double
-            double inputValue = Double.parseDouble(inputText);
+            // check if input is empty
+            if (inputText.isEmpty()) {
+                enterValue.setError("Please enter a value");
+                resultDisplay.setText("Converted value will appear here");
+                return;
+            }
 
-            // call conversion function
-            double result = convertValue(category, sourceUnit, destUnit, inputValue);
+            // check if source unit is not selected
+            if (sourceUnit.equals("Select Unit")) {
+                Toast.makeText(MainActivity.this, "Please select source unit", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            // display result (formatted to 2 decimal places)
-            resultDisplay.setText(String.format("%.2f", result));
+            // check if destination unit is not selected
+            if (destUnit.equals("Select Unit")) {
+                Toast.makeText(MainActivity.this, "Please select destination unit", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // check if selected conversion is identity conversion
+            if (sourceUnit.equals(destUnit)) {
+                Toast.makeText(MainActivity.this, "Source and destination units are same", Toast.LENGTH_SHORT).show();
+
+                try {
+                    double sameValue = Double.parseDouble(inputText);
+                    resultDisplay.setText(String.format("%.2f", sameValue));
+                } catch (NumberFormatException e) {
+                    enterValue.setError("Please enter a numeric value");
+                    resultDisplay.setText("Converted value will appear here");
+                }
+                return;
+            }
+
+            try {
+                // convert string input to double
+                double inputValue = Double.parseDouble(inputText);
+
+                // check if fuel efficiency value is negative
+                if (category.equals("Fuel Efficiency") && inputValue < 0) {
+                    enterValue.setError("Fuel efficiency cannot be negative");
+                    resultDisplay.setText("Converted value will appear here");
+                    return;
+                }
+
+                // call conversion function
+                double result = convertValue(category, sourceUnit, destUnit, inputValue);
+
+                // display result (formatted to 2 decimal places)
+                resultDisplay.setText(String.format("%.2f", result));
+            } catch (NumberFormatException e) {
+                // handle non numeric input so app does not crash
+                enterValue.setError("Please enter a numeric value");
+                resultDisplay.setText("Converted value will appear here");
+            }
         });
     }
     // function definition to update unit dropdowns based on selected category
